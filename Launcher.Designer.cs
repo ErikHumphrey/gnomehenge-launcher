@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlHeader = new System.Windows.Forms.Panel();
+            this.lblClose = new System.Windows.Forms.Label();
             this.picOpenID = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.lblLink1 = new System.Windows.Forms.Label();
@@ -39,12 +40,11 @@
             this.pnlAnnounceFront = new System.Windows.Forms.Panel();
             this.lblAnnouncement = new System.Windows.Forms.Label();
             this.picAnnouncer = new System.Windows.Forms.PictureBox();
-            this.pnlAnnounceBehind = new System.Windows.Forms.Panel();
             this.pnlPatcher = new System.Windows.Forms.Panel();
             this.lblStatusMessage = new System.Windows.Forms.Label();
             this.lblTimeRemaining = new System.Windows.Forms.Label();
             this.prgDownload = new System.Windows.Forms.ProgressBar();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.pnlTradables = new System.Windows.Forms.Panel();
             this.lblFeaturedTradables = new System.Windows.Forms.Label();
             this.pnlBox6 = new System.Windows.Forms.Panel();
             this.lblItem6 = new System.Windows.Forms.Label();
@@ -65,17 +65,16 @@
             this.lblItem1 = new System.Windows.Forms.Label();
             this.picTradable1 = new System.Windows.Forms.PictureBox();
             this.tmrDownload = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlBlog = new System.Windows.Forms.Panel();
+            this.picBlogImage = new System.Windows.Forms.PictureBox();
             this.lblBlogHeader = new System.Windows.Forms.Label();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOpenID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.pnlAnnounceFront.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAnnouncer)).BeginInit();
-            this.pnlAnnounceBehind.SuspendLayout();
             this.pnlPatcher.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.pnlTradables.SuspendLayout();
             this.pnlBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTradable6)).BeginInit();
             this.pnlBox5.SuspendLayout();
@@ -88,13 +87,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.picTradable2)).BeginInit();
             this.pnlBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTradable1)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlBlog.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBlogImage)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHeader
             // 
             this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+            this.pnlHeader.Controls.Add(this.lblClose);
             this.pnlHeader.Controls.Add(this.picOpenID);
             this.pnlHeader.Controls.Add(this.picLogo);
             this.pnlHeader.Controls.Add(this.lblLink1);
@@ -105,11 +105,28 @@
             this.pnlHeader.Name = "pnlHeader";
             this.pnlHeader.Size = new System.Drawing.Size(950, 57);
             this.pnlHeader.TabIndex = 1;
+            this.pnlHeader.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlHeader_MouseMove);
+            // 
+            // lblClose
+            // 
+            this.lblClose.AutoSize = true;
+            this.lblClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblClose.Font = new System.Drawing.Font("Hypatia Sans Pro", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(88)))), ((int)(((byte)(70)))));
+            this.lblClose.Location = new System.Drawing.Point(924, 1);
+            this.lblClose.Name = "lblClose";
+            this.lblClose.Size = new System.Drawing.Size(24, 21);
+            this.lblClose.TabIndex = 8;
+            this.lblClose.Text = "✖";
+            this.lblClose.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblClose_MouseClick);
+            this.lblClose.MouseEnter += new System.EventHandler(this.lblClose_MouseEnter);
+            this.lblClose.MouseLeave += new System.EventHandler(this.lblClose_MouseLeave);
             // 
             // picOpenID
             // 
+            this.picOpenID.Cursor = System.Windows.Forms.Cursors.Hand;
             this.picOpenID.Image = global::gnomehenge_launcher.Properties.Resources.imgSignInThroughSteam;
-            this.picOpenID.Location = new System.Drawing.Point(783, 17);
+            this.picOpenID.Location = new System.Drawing.Point(763, 17);
             this.picOpenID.Name = "picOpenID";
             this.picOpenID.Size = new System.Drawing.Size(154, 23);
             this.picOpenID.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -119,7 +136,7 @@
             // picLogo
             // 
             this.picLogo.Image = global::gnomehenge_launcher.Properties.Resources.alpha;
-            this.picLogo.Location = new System.Drawing.Point(12, 3);
+            this.picLogo.Location = new System.Drawing.Point(19, 5);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(221, 52);
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -129,42 +146,52 @@
             // lblLink1
             // 
             this.lblLink1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+            this.lblLink1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLink1.Font = new System.Drawing.Font("Hypatia Sans Pro", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLink1.ForeColor = System.Drawing.Color.White;
-            this.lblLink1.Location = new System.Drawing.Point(426, 0);
+            this.lblLink1.Location = new System.Drawing.Point(392, 0);
             this.lblLink1.Name = "lblLink1";
-            this.lblLink1.Size = new System.Drawing.Size(83, 57);
+            this.lblLink1.Size = new System.Drawing.Size(88, 57);
             this.lblLink1.TabIndex = 4;
             this.lblLink1.Text = "TWITTER";
             this.lblLink1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLink1.MouseEnter += new System.EventHandler(this.lblLink1_MouseEnter);
+            this.lblLink1.MouseLeave += new System.EventHandler(this.lblLink1_MouseLeave);
             // 
             // lblLink3
             // 
             this.lblLink3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+            this.lblLink3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLink3.Font = new System.Drawing.Font("Hypatia Sans Pro", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLink3.ForeColor = System.Drawing.Color.White;
-            this.lblLink3.Location = new System.Drawing.Point(652, 0);
+            this.lblLink3.Location = new System.Drawing.Point(640, 0);
             this.lblLink3.Name = "lblLink3";
-            this.lblLink3.Size = new System.Drawing.Size(125, 57);
+            this.lblLink3.Size = new System.Drawing.Size(103, 57);
             this.lblLink3.TabIndex = 6;
             this.lblLink3.Text = "SUBREDDIT";
             this.lblLink3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLink3.MouseEnter += new System.EventHandler(this.lblLink3_MouseEnter);
+            this.lblLink3.MouseLeave += new System.EventHandler(this.lblLink3_MouseLeave);
             // 
             // lblLink2
             // 
             this.lblLink2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+            this.lblLink2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblLink2.Font = new System.Drawing.Font("Hypatia Sans Pro", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLink2.ForeColor = System.Drawing.Color.White;
-            this.lblLink2.Location = new System.Drawing.Point(526, 0);
+            this.lblLink2.Location = new System.Drawing.Point(494, 0);
             this.lblLink2.Name = "lblLink2";
-            this.lblLink2.Size = new System.Drawing.Size(125, 57);
+            this.lblLink2.Size = new System.Drawing.Size(134, 57);
             this.lblLink2.TabIndex = 5;
             this.lblLink2.Text = "STEAM GROUP";
             this.lblLink2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLink2.MouseEnter += new System.EventHandler(this.lblLink2_MouseEnter);
+            this.lblLink2.MouseLeave += new System.EventHandler(this.lblLink2_MouseLeave);
             // 
             // btnPlay
             // 
             this.btnPlay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(97)))), ((int)(((byte)(59)))));
+            this.btnPlay.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPlay.Enabled = false;
             this.btnPlay.Font = new System.Drawing.Font("Hypatia Sans Pro", 17.25F, System.Drawing.FontStyle.Bold);
             this.btnPlay.ForeColor = System.Drawing.Color.White;
@@ -180,16 +207,16 @@
             this.pnlAnnounceFront.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(174)))), ((int)(((byte)(37)))));
             this.pnlAnnounceFront.Controls.Add(this.lblAnnouncement);
             this.pnlAnnounceFront.Controls.Add(this.picAnnouncer);
-            this.pnlAnnounceFront.Location = new System.Drawing.Point(1, 1);
+            this.pnlAnnounceFront.Location = new System.Drawing.Point(28, 72);
             this.pnlAnnounceFront.Name = "pnlAnnounceFront";
-            this.pnlAnnounceFront.Size = new System.Drawing.Size(927, 66);
+            this.pnlAnnounceFront.Size = new System.Drawing.Size(896, 66);
             this.pnlAnnounceFront.TabIndex = 2;
             // 
             // lblAnnouncement
             // 
             this.lblAnnouncement.Font = new System.Drawing.Font("Hypatia Sans Pro", 11.25F, System.Drawing.FontStyle.Bold);
             this.lblAnnouncement.ForeColor = System.Drawing.Color.White;
-            this.lblAnnouncement.Location = new System.Drawing.Point(81, 8);
+            this.lblAnnouncement.Location = new System.Drawing.Point(80, 8);
             this.lblAnnouncement.Name = "lblAnnouncement";
             this.lblAnnouncement.Size = new System.Drawing.Size(737, 47);
             this.lblAnnouncement.TabIndex = 4;
@@ -205,15 +232,6 @@
             this.picAnnouncer.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picAnnouncer.TabIndex = 3;
             this.picAnnouncer.TabStop = false;
-            // 
-            // pnlAnnounceBehind
-            // 
-            this.pnlAnnounceBehind.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(190)))), ((int)(((byte)(16)))));
-            this.pnlAnnounceBehind.Controls.Add(this.pnlAnnounceFront);
-            this.pnlAnnounceBehind.Location = new System.Drawing.Point(9, 63);
-            this.pnlAnnounceBehind.Name = "pnlAnnounceBehind";
-            this.pnlAnnounceBehind.Size = new System.Drawing.Size(929, 68);
-            this.pnlAnnounceBehind.TabIndex = 3;
             // 
             // pnlPatcher
             // 
@@ -261,20 +279,20 @@
             this.prgDownload.TabIndex = 7;
             this.prgDownload.Value = 1;
             // 
-            // panel5
+            // pnlTradables
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(38)))), ((int)(((byte)(29)))));
-            this.panel5.Controls.Add(this.lblFeaturedTradables);
-            this.panel5.Controls.Add(this.pnlBox6);
-            this.panel5.Controls.Add(this.pnlBox5);
-            this.panel5.Controls.Add(this.pnlBox3);
-            this.panel5.Controls.Add(this.pnlBox4);
-            this.panel5.Controls.Add(this.pnlBox2);
-            this.panel5.Controls.Add(this.pnlBox1);
-            this.panel5.Location = new System.Drawing.Point(547, 153);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(377, 284);
-            this.panel5.TabIndex = 6;
+            this.pnlTradables.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(38)))), ((int)(((byte)(29)))));
+            this.pnlTradables.Controls.Add(this.lblFeaturedTradables);
+            this.pnlTradables.Controls.Add(this.pnlBox6);
+            this.pnlTradables.Controls.Add(this.pnlBox5);
+            this.pnlTradables.Controls.Add(this.pnlBox3);
+            this.pnlTradables.Controls.Add(this.pnlBox4);
+            this.pnlTradables.Controls.Add(this.pnlBox2);
+            this.pnlTradables.Controls.Add(this.pnlBox1);
+            this.pnlTradables.Location = new System.Drawing.Point(547, 153);
+            this.pnlTradables.Name = "pnlTradables";
+            this.pnlTradables.Size = new System.Drawing.Size(377, 284);
+            this.pnlTradables.TabIndex = 6;
             // 
             // lblFeaturedTradables
             // 
@@ -484,36 +502,36 @@
             this.tmrDownload.Interval = 10;
             this.tmrDownload.Tick += new System.EventHandler(this.tmrSkinTimer_Tick);
             // 
-            // panel1
+            // pnlBlog
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(38)))), ((int)(((byte)(29)))));
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.lblBlogHeader);
-            this.panel1.Location = new System.Drawing.Point(28, 153);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(501, 284);
-            this.panel1.TabIndex = 7;
+            this.pnlBlog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(38)))), ((int)(((byte)(29)))));
+            this.pnlBlog.Controls.Add(this.picBlogImage);
+            this.pnlBlog.Controls.Add(this.lblBlogHeader);
+            this.pnlBlog.Location = new System.Drawing.Point(28, 153);
+            this.pnlBlog.Name = "pnlBlog";
+            this.pnlBlog.Size = new System.Drawing.Size(501, 284);
+            this.pnlBlog.TabIndex = 7;
             // 
-            // pictureBox1
+            // picBlogImage
             // 
-            this.pictureBox1.Image = global::gnomehenge_launcher.Properties.Resources.gnomestainedglass;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 49);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(464, 267);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.picBlogImage.Image = global::gnomehenge_launcher.Properties.Resources.gnomestainedglass;
+            this.picBlogImage.Location = new System.Drawing.Point(73, 48);
+            this.picBlogImage.Name = "picBlogImage";
+            this.picBlogImage.Size = new System.Drawing.Size(354, 223);
+            this.picBlogImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBlogImage.TabIndex = 8;
+            this.picBlogImage.TabStop = false;
             // 
             // lblBlogHeader
             // 
             this.lblBlogHeader.AutoSize = true;
             this.lblBlogHeader.Font = new System.Drawing.Font("Hypatia Sans Pro", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBlogHeader.ForeColor = System.Drawing.Color.White;
-            this.lblBlogHeader.Location = new System.Drawing.Point(10, 7);
+            this.lblBlogHeader.Location = new System.Drawing.Point(10, 8);
             this.lblBlogHeader.Name = "lblBlogHeader";
-            this.lblBlogHeader.Size = new System.Drawing.Size(291, 38);
+            this.lblBlogHeader.Size = new System.Drawing.Size(481, 38);
             this.lblBlogHeader.TabIndex = 7;
-            this.lblBlogHeader.Text = "Latest update: Alpha!";
+            this.lblBlogHeader.Text = "Thank you for playing GnomeHenge!";
             // 
             // frmGnomeHenge
             // 
@@ -521,15 +539,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(19)))), ((int)(((byte)(15)))));
             this.ClientSize = new System.Drawing.Size(950, 531);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.pnlAnnounceFront);
+            this.Controls.Add(this.pnlBlog);
+            this.Controls.Add(this.pnlTradables);
             this.Controls.Add(this.pnlPatcher);
-            this.Controls.Add(this.pnlAnnounceBehind);
             this.Controls.Add(this.pnlHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "frmGnomeHenge";
-            this.Text = "Skinhaven";
+            this.Text = "GnomeHenge";
             this.Load += new System.EventHandler(this.frmSkinhaven_Load);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
@@ -537,10 +555,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.pnlAnnounceFront.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picAnnouncer)).EndInit();
-            this.pnlAnnounceBehind.ResumeLayout(false);
             this.pnlPatcher.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.pnlTradables.ResumeLayout(false);
+            this.pnlTradables.PerformLayout();
             this.pnlBox6.ResumeLayout(false);
             this.pnlBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTradable6)).EndInit();
@@ -559,9 +576,9 @@
             this.pnlBox1.ResumeLayout(false);
             this.pnlBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picTradable1)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnlBlog.ResumeLayout(false);
+            this.pnlBlog.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBlogImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -573,11 +590,10 @@
         private System.Windows.Forms.Panel pnlAnnounceFront;
         private System.Windows.Forms.PictureBox picAnnouncer;
         private System.Windows.Forms.Label lblAnnouncement;
-        private System.Windows.Forms.Panel pnlAnnounceBehind;
         private System.Windows.Forms.Panel pnlPatcher;
         private System.Windows.Forms.Label lblLink3;
         private System.Windows.Forms.Label lblLink2;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel pnlTradables;
         private System.Windows.Forms.Panel pnlBox1;
         private System.Windows.Forms.PictureBox picTradable1;
         private System.Windows.Forms.Panel pnlBox2;
@@ -603,9 +619,10 @@
         private System.Windows.Forms.Label lblFeaturedTradables;
         private System.Windows.Forms.Label lblStatusMessage;
         private System.Windows.Forms.Label lblItem1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel pnlBlog;
+        private System.Windows.Forms.PictureBox picBlogImage;
         private System.Windows.Forms.Label lblBlogHeader;
+        private System.Windows.Forms.Label lblClose;
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Media;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +14,29 @@ namespace gnomehenge_launcher
 {
     public partial class frmGnomeHenge : Form
     {
-
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int CS_DROPSHADOW = 0x20000;
+                CreateParams cp = base.CreateParams;
+                cp.ClassStyle |= CS_DROPSHADOW;
+                return cp;
+            }
+        }
+        
         public frmGnomeHenge()
         {
             InitializeComponent();
         }
 
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
 
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         public System.Drawing.Image x(int circleUpperLeftX, int circleUpperLeftY, int circleDiameter)
         {
@@ -33,13 +50,9 @@ namespace gnomehenge_launcher
             return FinalImage;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void frmSkinhaven_Load(object sender, EventArgs e)
         {
+            ModifyProgressBarColor.SetState(prgDownload, 3);
             btnPlay.BackColor = Color.FromArgb(((int)(((byte)(113)))), ((int)(((byte)(97)))), ((int)(((byte)(59)))));
             tmrDownload.Start();
             picAnnouncer.Image = x(0, 0, 184);
@@ -73,6 +86,8 @@ namespace gnomehenge_launcher
                 tmrDownload.Stop();
                 btnPlay.Enabled = true;
                 btnPlay.BackColor = Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(174)))), ((int)(((byte)(37)))));
+                SoundPlayer ready = new SoundPlayer(Properties.Resources.sfxBoom);
+                ready.Play();
                 lblStatusMessage.Text = "GnomeHenge is up-to-date.";
             }
         }
@@ -80,6 +95,60 @@ namespace gnomehenge_launcher
         private void panel6_MouseClick(object sender, MouseEventArgs e)
         {
             MessageBox.Show("ayy lmao");
+        }
+
+        private void pnlHeader_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void lblClose_MouseLeave(object sender, EventArgs e)
+        {
+            lblClose.ForeColor = Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(88)))), ((int)(((byte)(70)))));
+        }
+
+        private void lblClose_MouseEnter(object sender, EventArgs e)
+        {
+            lblClose.ForeColor = System.Drawing.Color.White;
+        }
+
+        private void lblClose_MouseClick(object sender, MouseEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void lblLink1_MouseLeave(object sender, EventArgs e)
+        {
+            lblLink1.BackColor = Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+        }
+
+        private void lblLink2_MouseLeave(object sender, EventArgs e)
+        {
+            lblLink2.BackColor = Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+        }
+
+        private void lblLink3_MouseLeave(object sender, EventArgs e)
+        {
+            lblLink3.BackColor = Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(29)))), ((int)(((byte)(23)))));
+        }
+
+        private void lblLink1_MouseEnter(object sender, EventArgs e)
+        {
+            lblLink1.BackColor = Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(41)))), ((int)(((byte)(33)))));
+        }
+
+        private void lblLink2_MouseEnter(object sender, EventArgs e)
+        {
+            lblLink2.BackColor = Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(41)))), ((int)(((byte)(33)))));
+        }
+
+        private void lblLink3_MouseEnter(object sender, EventArgs e)
+        {
+            lblLink3.BackColor = Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(41)))), ((int)(((byte)(33)))));
         }
     }
 
