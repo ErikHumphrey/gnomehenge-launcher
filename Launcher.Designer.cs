@@ -100,6 +100,7 @@
             this.pnlHeader.Controls.Add(this.lblLink1);
             this.pnlHeader.Controls.Add(this.lblLink3);
             this.pnlHeader.Controls.Add(this.lblLink2);
+            this.pnlHeader.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
             this.pnlHeader.Name = "pnlHeader";
@@ -142,6 +143,7 @@
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picLogo.TabIndex = 7;
             this.picLogo.TabStop = false;
+            this.picLogo.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picLogo_MouseMove);
             // 
             // lblLink1
             // 

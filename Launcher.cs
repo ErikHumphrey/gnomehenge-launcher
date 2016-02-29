@@ -150,6 +150,15 @@ namespace gnomehenge_launcher
         {
             lblLink3.BackColor = Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(41)))), ((int)(((byte)(33)))));
         }
+
+        private void picLogo_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
     }
 
     public static class ModifyProgressBarColor
